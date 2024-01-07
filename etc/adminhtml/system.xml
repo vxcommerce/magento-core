@@ -16,7 +16,7 @@
             <class>separator-top</class>
             <label>VxCommerce</label>
             <tab>vxcommerce</tab>
-            <resource>VxCommerce_core::config</resource>
+            <resource>VxCommerce_Core::config</resource>
         </section>
     </system>
 </config>

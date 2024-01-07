@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  ~ /**
+  ~  * @author VxCommerce
+  ~  * @copyright Copyright (c) 2024 VxCommerce (https://magento2.vxcommerce.net)
+  ~  * @package Magento Core Package
+  ~  */
+  -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="VxCommerce_Core::main" title="VxCommerce" module="VxCommerce_Core" sortOrder="60" resource="VxCommerce_Core::main"/>
+    </menu>
+</config>

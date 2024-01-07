@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+  ~ /**
+  ~  * @author VxCommerce
+  ~  * @copyright Copyright (c) 2024 VxCommerce (https://magento2.vxcommerce.net)
+  ~  * @package Magento Core Package
+  ~  */
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="vxcommerce" translate="label" class="vxcommerce" sortOrder="60">
+            <label>VxCommerce</label>
+        </tab>
+        <section id="vxcommerce" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>VxCommerce</label>
+            <tab>vxcommerce</tab>
+            <resource>VxCommerce_core::config</resource>
+        </section>
+    </system>
+</config>
+

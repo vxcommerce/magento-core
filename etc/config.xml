@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+  ~ /**
+  ~  * @author VxCommerce
+  ~  * @copyright Copyright (c) 2024 VxCommerce (https://magento2.vxcommerce.net)
+  ~  * @package Magento Core Package
+  ~  */
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <vxcommerce />
+    </default>
+</config>
+

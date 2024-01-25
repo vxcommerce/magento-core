@@ -7,17 +7,17 @@
  *
  */
 
-namespace VxCommerce\Core\Controller\Adminhtml;
+namespace VxCommerce\Core\Controller;
 
-use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\Action\Context;
 
 /**
  *
  */
-abstract class AbstractAction extends \Magento\Backend\App\Action {
+abstract class AbstractAction extends \Magento\Framework\App\Action\Action {
 
     /**
-     * @var \Magento\Framework\Controller\ResultFactory
+     * @var
      */
     protected $_resultFactory;
 
@@ -32,17 +32,7 @@ abstract class AbstractAction extends \Magento\Backend\App\Action {
     }
 
     /**
-     * @param $data
-     *
      * @return mixed
-     */
-    public function createJsonResult($data){
-        $resultJson = $this->_resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_JSON);
-        return $resultJson->setData($data);
-    }
-
-    /**
-     * @return \Magento\Framework\Controller\ResultInterface
      */
     public function createPageResult(){
         $resultPage = $this->_resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_PAGE);
@@ -50,18 +40,10 @@ abstract class AbstractAction extends \Magento\Backend\App\Action {
     }
 
     /**
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return mixed
      */
     public function createRedirectResult(){
         $resultRedirect = $this->_resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
         return $resultRedirect;
-    }
-
-    /**
-     * @return \Magento\Framework\Controller\ResultInterface
-     */
-    public function createForwardResult(){
-        $resultForward = $this->_resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_FORWARD);
-        return $resultForward;
     }
 }

@@ -1,0 +1,6 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="notice" value="/**&#10; * @author VxCommerce&#10; * @copyright Copyright (c) 2024 VxCommerce (https://magento2.vxcommerce.net)&#10; * @package Magento Core Package&#10; */" />
+    <option name="myName" value="VxCommerce_Magento_Module_Core" />
+  </copyright>
+</component>

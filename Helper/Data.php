@@ -17,6 +17,11 @@ use Magento\Framework\App\Helper\AbstractHelper;
 class Data extends AbstractHelper {
 
     /**
+     * @var \Magento\Framework\Serialize\SerializerInterface
+     */
+    public $_serializer;
+
+    /**
      *
      */
     const DEFAULT_STATUS_YES    = 1;
@@ -26,6 +31,18 @@ class Data extends AbstractHelper {
      */
     const DEFAULT_STATUS_NO     = 2;
 
+    /**
+     * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Magento\Framework\Serialize\SerializerInterface $serializer
+     */
+    public function __construct(
+        \Magento\Framework\App\Helper\Context $context,
+        \Magento\Framework\Serialize\SerializerInterface $serializer
+    )
+    {
+        $this->_serializer = $serializer;
+        parent::__construct($context);
+    }
     /**
      * @param $configPath
      * @param $store
@@ -38,6 +55,24 @@ class Data extends AbstractHelper {
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $store
         );
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function arrayToSerialize($data)
+    {
+        return $this->_serializer->serialize($data);
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function serializeToArray($data)
+    {
+        return $this->_serializer->unserialize($data);
     }
 }
 

@@ -10,6 +10,7 @@
 namespace VxCommerce\Core\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
  *
@@ -17,9 +18,19 @@ use Magento\Framework\App\Helper\AbstractHelper;
 class Data extends AbstractHelper {
 
     /**
+     * @var \Magento\Framework\App\Config\Storage\WriterInterface
+     */
+    protected $_configWriter;
+
+    /**
      * @var \Magento\Framework\Serialize\SerializerInterface
      */
-    public $_serializer;
+    protected $_serializer;
+
+    /**
+     * @var \Magento\Framework\Serialize\JsonValidator
+     */
+    protected $_jsonValidator;
 
     /**
      *
@@ -33,14 +44,20 @@ class Data extends AbstractHelper {
 
     /**
      * @param \Magento\Framework\App\Helper\Context $context
+     * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
      * @param \Magento\Framework\Serialize\SerializerInterface $serializer
+     * @param \Magento\Framework\Serialize\JsonValidator $jsonValidator
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
-        \Magento\Framework\Serialize\SerializerInterface $serializer
+        \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
+        \Magento\Framework\Serialize\SerializerInterface $serializer,
+        \Magento\Framework\Serialize\JsonValidator $jsonValidator
     )
     {
+        $this->_configWriter = $configWriter;
         $this->_serializer = $serializer;
+        $this->_jsonValidator = $jsonValidator;
         parent::__construct($context);
     }
     /**
@@ -55,6 +72,18 @@ class Data extends AbstractHelper {
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
             $store
         );
+    }
+
+    /**
+     * @param $configPath
+     * @param $value
+     * @param $scope
+     * @param $store
+     * @return void
+     */
+    public function setConfigValue($configPath, $value, $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $store = 0)
+    {
+        $this->_configWriter->save($configPath, $value, $scope, $store);
     }
 
     /**
@@ -73,6 +102,14 @@ class Data extends AbstractHelper {
     public function serializeToArray($data)
     {
         return $this->_serializer->unserialize($data);
+    }
+
+    /**
+     * @param $string
+     * @return mixed
+     */
+    public function isJsonValid($string) {
+        return $this->_jsonValidator->isValid($string);
     }
 }
 

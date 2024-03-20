@@ -97,11 +97,9 @@ class Data extends AbstractHelper {
      * @return void
      */
     public function refreshCache($cacheTypes = []) {
-        /*
         foreach ($cacheTypes as $cacheType) {
             $this->_cacheTypeList->cleanType($cacheType);
         }
-        */
     }
 
     /**

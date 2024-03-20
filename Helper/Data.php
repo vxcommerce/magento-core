@@ -10,7 +10,6 @@
 namespace VxCommerce\Core\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
  *
@@ -22,6 +21,10 @@ class Data extends AbstractHelper {
      */
     protected $_configWriter;
 
+    /**
+     * @var \Magento\Framework\App\Cache\TypeListInterface
+     */
+    protected $_cacheTypeList;
     /**
      * @var \Magento\Framework\Serialize\SerializerInterface
      */
@@ -45,32 +48,35 @@ class Data extends AbstractHelper {
     /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Magento\Framework\App\Config\Storage\WriterInterface $configWriter
+     * @param \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList
      * @param \Magento\Framework\Serialize\SerializerInterface $serializer
      * @param \Magento\Framework\Serialize\JsonValidator $jsonValidator
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Framework\App\Config\Storage\WriterInterface $configWriter,
+        \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Framework\Serialize\SerializerInterface $serializer,
         \Magento\Framework\Serialize\JsonValidator $jsonValidator
     )
     {
         $this->_configWriter = $configWriter;
+        $this->_cacheTypeList = $cacheTypeList;
         $this->_serializer = $serializer;
         $this->_jsonValidator = $jsonValidator;
         parent::__construct($context);
     }
     /**
      * @param $configPath
-     * @param $store
+     * @param $storeId
      * @return mixed
      */
-    public function getConfigValue($configPath, $store = null)
+    public function getConfigValue($configPath, $storeId = null, $scope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE)
     {
         return $this->scopeConfig->getValue(
             $configPath,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
-            $store
+            $scope,
+            $storeId
         );
     }
 
@@ -78,12 +84,24 @@ class Data extends AbstractHelper {
      * @param $configPath
      * @param $value
      * @param $scope
-     * @param $store
+     * @param $storeId
      * @return void
      */
-    public function setConfigValue($configPath, $value, $scope = ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $store = 0)
+    public function setConfigValue($configPath, $value, $scope = \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT, $storeId = 0)
     {
-        $this->_configWriter->save($configPath, $value, $scope, $store);
+        $this->_configWriter->save($configPath, $value, $scope, $storeId);
+    }
+
+    /**
+     * @param $cacheTypes
+     * @return void
+     */
+    public function refreshCache($cacheTypes = []) {
+        /*
+        foreach ($cacheTypes as $cacheType) {
+            $this->_cacheTypeList->cleanType($cacheType);
+        }
+        */
     }
 
     /**

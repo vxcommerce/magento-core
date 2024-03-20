@@ -97,7 +97,7 @@ class HttpClient{
         $this->request($url, array(
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => $this->getHeaders(),
+            //CURLOPT_HTTPHEADER => $this->getHeaders(),
             CURLOPT_VERBOSE => false,
             CURLOPT_HEADER => false,
         ));
